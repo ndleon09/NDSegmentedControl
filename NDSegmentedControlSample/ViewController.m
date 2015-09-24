@@ -25,7 +25,7 @@
     
     __typeof (&*self) __weak weakSelf = self;
     
-    self.segmentedControl = [[NDSegmentedControl alloc] initWithFrame:CGRectMake(15, CGRectGetHeight(self.view.frame) / 2, CGRectGetWidth(self.view.frame) - 30, 40)];
+    self.segmentedControl = [[NDSegmentedControl alloc] initWithFrame:CGRectMake(20, 40, 170, 40)];
     self.segmentedControl.required = YES;
     self.segmentedControl.tintColor = [UIColor darkGrayColor];
     self.segmentedControl.titleFont = [UIFont systemFontOfSize:15];
@@ -34,18 +34,15 @@
     }];
     [self.view addSubview:self.segmentedControl];
     
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSInteger weekDay = [gregorian ordinalityOfUnit:NSWeekdayCalendarUnit inUnit:NSWeekCalendarUnit forDate:[NSDate date]];
-    
-    NSMutableArray *weekdays = [NSMutableArray arrayWithArray:[[[NSDateFormatter alloc] init] shortWeekdaySymbols]];
+    NSMutableArray *months = [NSMutableArray arrayWithArray:[[[NSDateFormatter alloc] init] shortMonthSymbols]];
     NSMutableArray *items = [[NSMutableArray alloc] init];
-    [weekdays enumerateObjectsUsingBlock:^(NSString *object, NSUInteger index, BOOL *stop) {
+    [months enumerateObjectsUsingBlock:^(NSString *object, NSUInteger index, BOOL *stop) {
         NDSegmentedControlItemObject *item = [NDSegmentedControlItemObject itemWithTitle:object value:@(index + 1)];
         [items addObject:item];
     }];
     
     self.segmentedControl.items = [NSArray arrayWithArray:items];
-    self.segmentedControl.selectedItem = [items objectAtIndex:weekDay - 1];
+    self.segmentedControl.selectedItem = [items objectAtIndex:7];
 }
 
 -(void)selectedItemChange:(id<NDSegmentedControlItem>)selectedItem

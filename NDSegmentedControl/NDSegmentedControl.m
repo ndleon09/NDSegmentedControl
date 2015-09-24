@@ -59,6 +59,7 @@ const CGFloat kNDSegmentedControlSpaceBetweenItems = 5.;
     if (_selectedItemView) {
         _selectedItemView.itemSelected = YES;
         _selectedItem = selectedItemView.item;
+        [_itemsScrollView scrollRectToVisible:selectedItemView.frame animated:YES];
     }
     else {
         _selectedItem = nil;
